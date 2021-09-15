@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+
+
+{% block title %}Agregats {{ canva.site }} {{ canva.mois }} {{ canva.année }}{% endblock %}
+
+
+{% block titre %}<div class="btn btn-primary w-100 mb-3">{{ canva.site }} {{ canva.mois }} {{ canva.année }}{% endblock titre %}</div>
+
+
+{% block content %}
+
+<form  action="" method="post" enctype="multipart/form-data">
+	
+  {% for hidden_field in form.hidden_fields %}
+  {{ hidden_field.error }}
+  {{ hidden_field }}
+  {% endfor %}
+  
+  {% csrf_token %}
+  
+  {{ form.management_form }}
+  {{ form.non_form_errors }}
+  
+  
+  
+  {% for checkbox_form in form.forms %}
+  
+  
+  
+  <h5>
+			{% if checkbox_form.instance.id %}
+			
+			{% else %}
+				{% if form.forms|length > 29 %}
+					
+				{% else %}
+					
+				{% endif %}	
+			{% endif %}
+
+  </h5>
+			{% for hidden_field in checkbox_form.hidden_fields %}
+				{{ hidden_field.errors }}
+			{% endfor %}
+			
+			
+				<center><h3>{{ checkbox_form }}</h3></center>
+				
+			
+				
+		{% endfor %}
+		
+		<hr>
+		
+		
+		<p>
+			<center><button type="submit" value="mettre a jour" class="btn btn-primary w-50 mb-3">mettre a jour</button></center>
+			<center><a href="{{ canva.get_absolute_url }}" role="button" class="btn btn-secondary w-50">Annuler</a></center>
+			
+		</p>
+			
+</form>
+
+
+
+{% endblock content %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}Agregats {{ canva.site }} {{ canva.mois }} {{ canva.année }}{% endblock %}
+
+
+{% block titre %}<div class="btn btn-primary w-100 mb-3">{{ canva.site }} {{ canva.mois }} {{ canva.année }}{% endblock titre %}</div>
+
+
+{% block content %}
+<hr>
+<table width="1548" border="1">
+  <tbody>
+    <tr bgcolor="#17ABB0" style="color: #000000">
+      <th width="722" height="27" scope="col">Banques, Etablissement Finnanciers et Assimilés</th>
+      <th width="134" scope="col">MOIS m-1</th>
+      <th width="309" scope="col">MOIS m</th>
+      <th width="355" scope="col">OBSERVTIONS</th>
+    </tr>
+  </tbody>
+</table>
+
+
+				
+		<form  action="" method="post" enctype="multipart/form-data">
+		{% for hidden_field in form.hidden_fields %}
+			{{ hidden_field.error }}
+			{{ hidden_field }}
+		{% endfor %}
+		
+		{% csrf_token %}
+		
+		{{ form.management_form }}
+		{{ form.non_form_errors }}
+		
+		{% for tresorerie_form in form.forms %}
+			<h5>
+			{% if tresorerie_form.instance.id %}
+			
+			{% else %}
+				{% if form.forms|length > 29 %}
+					
+				{% else %}
+					
+				{% endif %}	
+			{% endif %}
+		</h5>
+			{% for hidden_field in tresorerie_form.hidden_fields %}
+				{{ hidden_field.errors }}
+			{% endfor %}
+			{% for checkbox in canva.checkbox_canva.all %}
+		  
+			{% if checkbox.validation == True  %}
+			
+			<fieldset disabled="disabled">
+				{{ tresorerie_form }}
+				
+			</fieldset>
+			
+			{% else %}
+		{{ tresorerie_form }}
+			{% endif %}
+				
+		{% endfor %}
+			{% endfor %}
+		<hr>		
+		<p>
+			{% for checkbox in canva.checkbox_canva.all %}
+			{% if checkbox.validation == True  %}
+			
+			<center><a href="{{ canva.get_absolute_url }}" role="button" class="btn btn-secondary w-50">Annuler</a></center>
+			
+			{% else %}
+			<center><button type="submit" value="mettre a jour" class="btn btn-primary w-50 mb-3">mettre a jour</button></center>
+			<center><a href="{{ canva.get_absolute_url }}" role="button" class="btn btn-secondary w-50">Annuler</a></center>
+			{% endif %}
+			{% endfor %}
+		</p>
+			
+</form>
+			
+				
+	
+	
+{% endblock content %}

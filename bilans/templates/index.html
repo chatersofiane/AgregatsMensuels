@@ -1,0 +1,109 @@
+<p>{% extends 'base.html' %}
+  
+  
+  {% block title %}CANVAS{% endblock %}</p>
+<p>{% block content %}</p>
+
+<center><div class="btn btn-primary w-80 mb-2"><h1>Canvas Monsuels</h1></div></center>
+
+<p align=right class "pt-2">
+	<a href="{% url 'bilans:home' %}" role)="button" class="btn btn-secondary w-40">Retour</a></p>
+
+<table width="1471" height="519" border="1">
+  <tbody>
+    <tr bgcolor="#17ABB0" border="1">
+      <th width="198" height="59" style="text-align: center" scope="col"><h1><em><strong>DG</strong></em></h1></th>
+      <th width="153" scope="col"><em><strong>ALTUMET</strong></em></th>
+      <th width="171" scope="col"><em><strong>IRRAGRIS</strong></em></th>
+      <th width="169" scope="col"><em><strong>PAF</strong></em></th>
+      <th width="135" scope="col"><em><strong>PTS</strong></em></th>
+      <th width="144" scope="col"><em><strong>PTTP</strong></em></th>
+    </tr>
+    <tr>
+      <td style="text-align: center" border="1">{% if DG %}
+        
+          {% for c in DG %}
+          
+            <center>
+              <a class="btn btn-info btn-outline-dark w-auto mb-2" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+          
+          {% endfor %}
+        
+{% endif %}</td>
+      <td><p>{% if ALTUMET %}
+        </p>
+        <ul class="list-unstyled">
+          {% for c in ALTUMET %}
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+          </li>
+          {% endfor %}
+        </ul>
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+      <td><p>{% if IRRAGRIS %}
+        </p>
+        <ul class="list-unstyled">
+          {% for c in IRRAGRIS %}
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+          </li>
+          {% endfor %}
+        </ul>
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+      <td><p>{% if PAF %}
+        </p>
+        <ul class="list-unstyled">
+          {% for c in PAF %}
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+          </li>
+          {% endfor %}
+        </ul>
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+      <td><p>{% if PTS %}
+        </p>
+        <ul class="list-unstyled">
+          {% for c in PTS %}
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+          </li>
+          {% endfor %}
+        </ul>
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+      <td><p>{% if PTTP %}
+        </p>
+        
+          {% for c in PTTP %}
+          
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+          
+          {% endfor %}
+        
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock content %}
+

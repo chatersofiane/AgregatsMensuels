@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+
+{% block title %}{{ canva.name }}{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+	<li class="nav-item active">
+        <a class="nav-link" href="{% url 'bilans:list_canvas' %}"><button class="btn btn-danger">Retour a la List Canvas</button></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'bilans:home' %}"><button class="btn btn-danger">Retour a La Page D'Accueil</button></a>
+      </li>
+	</ul>
+</div>
+</nav>
+
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	
+	<center><h3>AGREGATS MONSUELS</h3></center>
+	<center><h3>{{ canva.site }} {{ canva.mois }} {{ canva.année }}</h3></center>
+	<hr>
+
+<p>
+		<a href="{% url 'bilans:bilan_edit' pk=canva.pk %}" role="button" class="btn btn-primary w-100 mb-2">Editer BILAN</a>
+		<a href="{% url 'bilans:autre_edit' pk=canva.pk %}" role="button" class="btn btn-primary w-100 mb-2">Editer AUTRES AGREGATS</a>
+		<a href="{% url 'bilans:tresorerie_edit' pk=canva.pk %}" role="button" class="btn btn-primary w-100 mb-2">Editer TRESORERIE</a>
+		<a href="{% url 'bilans:production_edit' pk=canva.pk %}" role="button" class="btn btn-primary w-100 mb-2">Editer PRODUCTION</a>
+		<a href="{% url 'bilans:bilan_excel' canva.pk %}" role="button" class="btn btn-secondary w-100">exporter vers excel</a>
+</p>
+		{% if request.user|has_group:"CDG" %}
+		<p>	
+		<a href="{% url 'bilans:canva_valid' pk=canva.pk %}" role="button" class="btn btn-info w-100 mb-2">VALIDER</a>
+		</p>
+		{% endif %}
+{% endblock content %}

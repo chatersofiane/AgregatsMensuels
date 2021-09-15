@@ -1,0 +1,81 @@
+<!doctype html>
+{% load static %}
+{% load auth_extras %}
+
+
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+		<title>{% block title %}Page d'accueil{% endblock %}</title>
+	
+	<body>
+	{% if request.user.is_authenticated %}
+	<div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">{{ user }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/accounts/logout"><button class="btn btn-info">{{ user }} | Se deconnecter</button></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'auth_password_change' %}"><button class="btn btn-info">changer password</button></a>
+      </li>
+      
+    </div>
+</nav>
+  {% else %}
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">Vous n'etes pas connecter</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'auth_login' %}"><button class="btn btn-danger">Se connecter</button></a>
+      </li>
+	  
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'registration_register' %}"><button class="btn btn-info">s'enregistrer</button></a>
+        </li>
+		<li class="nav-item">
+        <a class="nav-link" href="/password/reset"><button class="btn btn-secondary">reinitiliser le mot de passe</button> </a>
+        </li>
+	</ul>
+    </div>
+</nav> 
+{% endif %}
+  <br />
+	</head>
+	</div>	
+		<div><h5><center>
+			{% block titre %}	
+			
+			{% endblock titre %}
+			</h5></center>
+		</div>
+		
+		<main role='main' class="container-fluid">
+			<div class="jumbotron">
+					{% block content %}
+					
+					
+					
+					{% endblock %}
+			</div>
+				
+					
+		</main>
+	</body>
+	
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+{% load static %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+	
+		
+	
+	<h1><center>Agregats Mensuels</center></h1>
+	
+	<hr>
+	
+	<center>
+	<a href="{% url 'bilans:list_canvas' %}" role="button" class="btn btn-primary w-50 mb-2">EDITER Agregats mensuels</a>
+	<a href="{% url 'bilans:list2_canvas' %}" role="button" class="btn btn-primary w-50 mb-2">Sommes Agregats mensuels</a>
+	{% if request.user|has_group:"admin" %}
+	<a href="{% url 'bilans:add_canvas' %}" role="button" class="btn btn-secondary w-50">Ajouter Canvas</a>
+	{% endif %}
+	</center>
+{% else %}
+	<center><h1>veuillez vous connecter</h1></center>
+{% endif %}
+
+
+
+
+
+
+{% endblock content %}

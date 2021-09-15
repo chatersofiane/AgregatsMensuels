@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+
+{% block title %}Nouveau Canvas{% endblock %}
+
+{% block content %}
+
+	<form action="" method="post">
+		{% for hidden_field in form.hidden_fields %}
+			{{ hidden_field.error }}
+			{{ hidden_field }}
+		{% endfor %}
+		
+		{% csrf_token %}
+		
+		{{ form.non_form_errors }}
+		<ul class="list-group">
+		{% for field in form %}
+			{{ field.errors }}
+		<center><li class="list-group-item">{{ field.label_tag }}	{{ field }}</li></center>		
+		</ul>
+		{% endfor %}
+		
+		<p class="pt-2">
+			<button type="submit" class="btn btn-primary w-100 mb-2">Ajouter Canvas</button>
+			<a href="{% url 'bilans:home' %}" role="button" class="btn btn-secondary w-100">Annuler</a>
+		</p>
+{% endblock content %}

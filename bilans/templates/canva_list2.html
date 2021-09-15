@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+  
+{% block title %}CANVAS{% endblock %}
+<p>{% block content %}</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'bilans:home' %}"><button class="btn btn-danger">Retour</button></a>
+      </li>
+	</ul>
+</div>
+</nav>
+
+
+<center><div class="btn btn-primary w-80 mb-2"><h1>Canvas Monsuels EDITION</h1></div></center>
+
+
+<table width="1471" height="519" border="1">
+  <tbody>
+    <tr bgcolor="#17ABB0" border="1">
+      <th width="248" height="59" style="text-align: center" scope="col"><h1><em><strong>Sommes Agregats Mensuels</strong></em></h1></th>
+    </tr>
+    <tr>
+      <td><p>{% if DG %}</p>
+	   <ul class="list-unstyled">
+          {% for c in DG %}
+		  {% if now >= c.created %}
+          <li>
+		  <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href='/canvas/consult/{{c.pk}}'>{{ c.mois }}	---	{{ c.année }} </a>
+            </center>
+			</li>
+          {% endif %} 
+          {% endfor %}
+        
+		</ul>
+		{% endif %} </td></tr>
+  </tbody>
+</table>
+
+<HR>
+<BR />
+
+{% endblock content %}
+

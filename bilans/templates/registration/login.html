@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<center><h1>se connecter</h1></center>
+	
+	<center><form method="post" action=".">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="se connecter" />
+		<input type="hidden" name="next" vaue="{{ next }}" />
+	</form></center>
+	<center><p>
+		pas un membre?
+		<a href="{% url 'registration_register' %}">s'enregister</a>
+	</p></center>
+{% endblock %}

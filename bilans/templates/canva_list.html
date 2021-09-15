@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+  
+{% block title %}CANVAS{% endblock %}
+<p>{% block content %}</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'bilans:home' %}"><button class="btn btn-danger">Retour</button></a>
+      </li>
+	</ul>
+</div>
+</nav>
+
+
+<center><div class="btn btn-primary w-80 mb-2"><h1>Canvas Monsuels EDITION</h1></div></center>
+
+
+<table width="1471" height="519" border="1">
+  <tbody>
+    <tr bgcolor="#17ABB0" border="1">
+      <th width="248" height="59" style="text-align: center" scope="col"><h1><em><strong>DG</strong></em></h1></th>
+      <th width="237" scope="col"><em>
+      <h1><strong> ALTUMET</strong></h1></em></th>
+      <th width="267" style="text-align: center" scope="col"><em><h1><strong>IRRAGRIS</strong></h1></em></th>
+      <th width="224" style="text-align: center" scope="col"><em><h1><strong>PAF</strong></h1></em></th>
+      <th width="222" style="text-align: center" scope="col"><em><h1><strong>PTS</strong></h1></em></th>
+      <th width="233" style="text-align: center" scope="col"><em><h1><strong>PTTP</strong></h1></em></th>
+    </tr>
+    <tr>
+      <td><p>{% if DG %}</p>
+       {% if request.user|has_group:"DG" %} 
+	   <ul class="list-unstyled">
+          {% for c in DG %}
+		  {% if now >= c.created %}
+          <li>
+		  <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }} </a>
+            </center>
+			</li>
+          {% endif %} 
+          {% endfor %}
+        {% endif %}
+		</ul>
+		{% endif %} </td>
+      <td><p>{% if ALTUMET %}
+        </p>
+		{% if request.user|has_group:"ALTUMET" %} 
+        <ul class="list-unstyled">
+          {% for c in ALTUMET %}
+		  {% if now >= c.created  %}
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+			{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+		{% endif %}
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+      <td><p>{% if IRRAGRIS %}
+        </p>
+		{% if request.user|has_group:"IRRAGRIS" %}
+        <ul class="list-unstyled">
+          {% for c in IRRAGRIS %}
+		  {% if now >= c.created %}
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+			{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+		{% endif %}
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+      <td><p>{% if PAF %}
+        </p>
+		{% if request.user|has_group:"PAF" %}
+        <ul class="list-unstyled">
+          {% for c in PAF %}
+		  {% if now >= c.created %}
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+			{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+		{% endif %}
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+      <td><p>{% if PTS %}
+        </p>
+		{% if request.user|has_group:"PTS" %}
+        <ul class="list-unstyled">
+          {% for c in PTS %}
+		  
+		  {% if now >= c.created %}
+		  
+          <li>
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+			{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+		{% endif %}
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>
+<td><p>{% if PTTP %}
+        </p>
+{% if request.user|has_group:"PTTP" %}
+   <ul class="list-unstyled">   
+        
+          {% for c in PTTP %}
+		  {% if now >= c.created %}
+        <li>  
+            <center>
+              <a class="btn btn-info btn-outline-dark w-30 mb-1" href="{{ c.get_absolute_url }}">{{ c.mois }}	---	{{ c.année }}</a>
+            </center>
+			
+		</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+{% else %}
+<p>il n y a pas de Canvas.</p>
+{% endif %}</td>{% endif %}
+    </tr>
+  </tbody>
+</table>
+
+<HR>
+<BR />
+
+{% endblock content %}
+

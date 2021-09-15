@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+
+{% block title %}{{ canva.name }}{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+		<li class="nav-item active">
+        <a class="nav-link" href="{% url 'bilans:list2_canvas' %}"><button class="btn btn-danger">Retour a la List</button></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'bilans:home' %}"><button class="btn btn-danger">Retour a La page D'accueil</button></a>
+      </li>
+	</ul>
+</div>
+</nav>
+
+CONSULTATION
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	
+	<h3>AGREGATS MONSUELS</h3>
+	<div class="d-flex d-flex-inline">
+		<span class="pe-2"><h5>CANVA</h5></span> 
+		<h5>{{ canva.mois }} {{ canva.année }}</h5>
+	</div>
+
+<div class="btn btn-primary w-100 mb-3">BILAN MONSUEL</div>
+
+<br />
+<br /><br />
+<br /><br />
+<br />	
+
+
+<center><a href="{% url 'bilans:somme_excel' canva.pk %}" role="button" class="btn btn-secondary w-50 mb-50"><h1>Somme des Agregats de {{ canva.mois }} {{ canva.année }}</h1></a></center>
+
+
+
+<br />
+<br />
+{% endblock content %}
